@@ -1,6 +1,7 @@
 # Progress
 
-## Current: Module 1, step 1 done (pending: commit); next is step 2
+## Current: Module 1, step 2 done (pending: commit); next is step 3 (interfaces; reuse the `booking` / `firstname` typo example)
+Open question, not yet answered: why doesn't pinning exact versions in package.json replace a lock file? (transitive dependencies)
 
 Note for later: `tsconfig.json` has `"types": []`, so Node types are not loaded. Expect `process.env` to fail type-checking in Module 3 (dotenv). Let the learner hit it and diagnose it.
 
@@ -16,9 +17,12 @@ Module 1 plan:
 ## Mastered
 - tsx/Playwright erase types without checking; `tsc --noEmit` checks only. Predicted correctly, verified with exit codes (2026-11-23)
 - Lock file must be committed (reproducible installs); introduced `npm ci` for CI (2026-11-23)
+- Inference, annotate at boundaries; `any` disables checking (typo passes tsc, crashes at runtime). Predicted correctly (2026-11-23)
+- `tsc` checks the whole project; passing a file name ignores tsconfig (TS5112)
 
 ## Weak spots (revisit)
-- (none yet)
+- `unknown`: predicted tsc would pass; it blocks any use until narrowed. Verified with TS18046. Re-check in step 3/4 (narrowing)
+- Checking results: ran tsc against an unsaved empty file and took exit 0 as a pass. Theme: "green only means something if it could fail"
 
 ## Drill scores
 | Drill | Found | Missed | False alarms |
